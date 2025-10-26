@@ -1,0 +1,92 @@
+# NeuroMode – Smart Mood Detection and Wellness Assistant (Non-Interactive Version)
+# Works in restricted or non-interactive environments
+
+import random
+
+# --- Keyword lists for basic mood detection ---
+positive_words = [
+    "happy", "joy", "great", "awesome", "love", "excited", "good",
+    "fantastic", "amazing", "wonderful", "glad", "positive"
+]
+negative_words = [
+    "sad", "tired", "angry", "bad", "upset", "depressed", "anxious",
+    "stressed", "terrible", "hate", "worried", "negative"
+]
+
+# --- Suggestions & Tips ---
+suggestions = {
+    "positive": [
+        "Keep up the great energy! 🌞",
+        "Share your happiness with a friend 💬",
+        "Do something creative today 🎨",
+        "Keep smiling — it suits you 😄"
+    ],
+    "neutral": [
+        "Take a peaceful walk 🏞️",
+        "Listen to your favorite music 🎶",
+        "Try a short meditation 🧘‍♀️",
+        "Reflect on something positive 🌸"
+    ],
+    "negative": [
+        "Take a deep breath — it's okay 💖",
+        "Call a loved one ❤️",
+        "Watch something funny 😂",
+        "Eat your favorite comfort food 🍲",
+        "Try a 5-minute breathing exercise 🫁"
+    ]
+}
+
+wellness_tips = [
+    "Practice gratitude – list 3 things you're thankful for 🙏",
+    "Move your body – a short walk reduces stress 🏃‍♂️",
+    "Limit screens – take a break from your phone 📵",
+    "Connect with someone you trust 💬",
+    "Drink water and stay hydrated 💧"
+]
+
+# --- Mood detection function ---
+def simple_sentiment(text):
+    text_lower = text.lower()
+    pos = sum(word in text_lower for word in positive_words)
+    neg = sum(word in text_lower for word in negative_words)
+
+    if pos > neg:
+        return "positive"
+    elif neg > pos:
+        return "negative"
+    else:
+        return "neutral"
+
+# --- Analyze and print result ---
+def analyze_mood(text):
+    mood = simple_sentiment(text)
+    suggestion = random.choice(suggestions[mood])
+    tip = random.choice(wellness_tips)
+
+    print("🧠 Text:", text)
+    print("➡️ Detected Mood:", mood.capitalize())
+    print("💡 Suggestion:", suggestion)
+    print("🌿 Wellness Tip:", tip)
+    print("-------------------------------------------\n")
+
+# --- Main program (auto-runs with examples) ---
+def main():
+    print("==========================================")
+    print("🧠 NeuroMode – Smart Mood Detection (Offline)")
+    print("==========================================\n")
+
+    # Sample inputs (you can change or extend this list)
+    sample_inputs = [
+        "I am feeling very happy and excited today!",
+        "I feel tired and stressed from work.",
+        "Nothing special, just an average day.",
+        "I'm anxious about my exams.",
+        "Life is wonderful and I love my friends."
+    ]
+
+    for sentence in sample_inputs:
+        analyze_mood(sentence)
+
+if __name__ == "__main__":
+    main()
+
